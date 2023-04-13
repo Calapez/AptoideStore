@@ -1,4 +1,4 @@
-package pt.brunoponte.aptoidestore
+package pt.brunoponte.aptoidestore.presentation
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -9,6 +9,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import pt.brunoponte.aptoidestore.R
 import pt.brunoponte.aptoidestore.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

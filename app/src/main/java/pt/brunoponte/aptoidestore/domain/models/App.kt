@@ -1,5 +1,6 @@
 package pt.brunoponte.aptoidestore.domain.models
 
+import java.time.LocalDateTime
 import java.util.*
 
 data class App (
@@ -15,9 +16,9 @@ data class App (
     var size: Long?,
     var downloads: Long?,
     var pDownloads: Long?,
-    var added: Date?,
-    var modified: Date?,
-    var updated: Date?,
+    var added: LocalDateTime?,
+    var modified: LocalDateTime?,
+    var updated: LocalDateTime?,
     var rating: Float?,
     var iconUrl: String?,
     var graphicUrl: String?,

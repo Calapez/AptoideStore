@@ -1,13 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.frontstore.FrontstoreFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/editorsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="18sp"
+        android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="10dp"
+        android:text="@string/editors_choice" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/editorsMoreButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/editorsText"
+        app:layout_constraintBottom_toBottomOf="@id/editorsText"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="10dp"
+        android:text="@string/more"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:textColor="@color/main"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/editorsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/editorsMoreButton"/>
+
+    <TextView
+        android:id="@+id/topText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/editorsRecyclerView"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="18sp"
+        android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="10dp"
+        android:text="@string/top_apps" />
+
+    <Button
+        android:id="@+id/topMoreButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/topText"
+        app:layout_constraintBottom_toBottomOf="@id/topText"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="10dp"
+        android:text="@string/more"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:textColor="@color/main"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/topRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/topMoreButton"
+        android:layout_marginBottom="25dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

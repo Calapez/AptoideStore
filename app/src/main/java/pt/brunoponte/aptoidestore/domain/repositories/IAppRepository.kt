@@ -5,7 +5,7 @@ import pt.brunoponte.aptoidestore.domain.Response
 import pt.brunoponte.aptoidestore.domain.models.App
 
 interface IAppRepository {
-    suspend fun getApps(page: Page) : Response<List<App>>
+    suspend fun getApps() : Response<List<App>>
 
     suspend fun getApp(id: Long) : Response<App?>
 }

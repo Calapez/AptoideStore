@@ -17,5 +17,10 @@
     <fragment
         android:id="@+id/appDetailsFragment"
         android:name="pt.brunoponte.aptoidestore.presentation.appDetails.AppDetailsFragment"
-        tools:layout="@layout/fragment_app_details" />
+        tools:layout="@layout/fragment_app_details" >
+        <argument
+            android:name="appId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
 </navigation>

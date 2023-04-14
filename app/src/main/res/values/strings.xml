@@ -4,12 +4,15 @@
     <string name="image_content_logo">App logo</string>
     <string name="image_content_app_thumbnail">App thumbnail</string>
 
+    <string name="not_applicable">N/A</string>
+
     <string name="action_profile">Profile</string>
 
     <!-- Frontstore page -->
     <string name="editors_choice">Editors Choice</string>
     <string name="top_apps">Local top apps</string>
     <string name="more">MORE</string>
+    <string name="error_loading_apps">An error has occurred.</string>
 
     <!-- App details page-->
     <string name="rating">Rating</string>

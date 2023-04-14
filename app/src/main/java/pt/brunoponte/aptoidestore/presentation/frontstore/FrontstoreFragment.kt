@@ -12,12 +12,15 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import pt.brunoponte.aptoidestore.databinding.FragmentFrontstoreBinding
 import pt.brunoponte.aptoidestore.presentation.frontstore.editorsAppListAdapter.EditorsAppListAdapter
 import pt.brunoponte.aptoidestore.presentation.frontstore.editorsAppListAdapter.EditorsAppListInteraction
 import pt.brunoponte.aptoidestore.presentation.frontstore.topAppListAdapter.TopAppListInteraction
 import pt.brunoponte.aptoidestore.presentation.frontstore.topAppListAdapter.TopAppListAdapter
 
+
+@AndroidEntryPoint
 class FrontstoreFragment : Fragment(), TopAppListInteraction, EditorsAppListInteraction {
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)

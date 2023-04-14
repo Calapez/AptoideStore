@@ -11,9 +11,11 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import dagger.hilt.android.AndroidEntryPoint
 import pt.brunoponte.aptoidestore.R
 import pt.brunoponte.aptoidestore.databinding.FragmentAppDetailsBinding
 
+@AndroidEntryPoint
 class AppDetailsFragment : Fragment() {
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)

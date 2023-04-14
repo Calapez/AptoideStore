@@ -4,12 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import pt.brunoponte.aptoidestore.domain.Response
 import pt.brunoponte.aptoidestore.domain.useCases.GetAppListUseCase
+import javax.inject.Inject
 
-class FrontstoreViewModel(
+@HiltViewModel
+class FrontstoreViewModel
+@Inject
+constructor(
     private val getAppListUseCase: GetAppListUseCase,
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {

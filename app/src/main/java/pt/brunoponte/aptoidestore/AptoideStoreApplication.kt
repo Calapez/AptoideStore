@@ -1,4 +1,7 @@
 package pt.brunoponte.aptoidestore
 
-class AptoideStoreApplication {
-}
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
+@HiltAndroidApp
+class AptoideStoreApplication : Application()

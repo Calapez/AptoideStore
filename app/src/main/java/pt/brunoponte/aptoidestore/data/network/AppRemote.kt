@@ -1,7 +1,11 @@
 package pt.brunoponte.aptoidestore.data.network
 
+import javax.inject.Inject
+
 // TODO: Check if we even need this abstraction
-class AppRemote (
+class AppRemote
+@Inject
+constructor(
     private val requestService: IRequestService
 ) : IAppRemote {
 

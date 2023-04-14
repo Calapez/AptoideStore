@@ -3,13 +3,18 @@ package pt.brunoponte.aptoidestore.presentation.appDetails
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pt.brunoponte.aptoidestore.domain.Response
 import pt.brunoponte.aptoidestore.domain.useCases.GetAppDetailsUseCase
+import javax.inject.Inject
 
-class AppDetailsViewModel(
+@HiltViewModel
+class AppDetailsViewModel
+@Inject
+constructor(
     private val getAppDetailsUseCase: GetAppDetailsUseCase,
 ) : ViewModel() {
 

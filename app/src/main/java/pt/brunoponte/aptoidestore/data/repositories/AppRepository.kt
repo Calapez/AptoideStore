@@ -14,7 +14,11 @@ constructor(
 ) : IAppRepository {
     override suspend fun getApps(): Response<List<App>> =
         try {
-            val apps = dataSourceFactory.getDataSource().getApps()
+            val isCached = dataSourceFactory.getCacheDataSource().areAppsCached()
+            // Get breeds from the proper source
+            val apps = dataSourceFactory.getDataSource(isCached).getApps()
+            // Save apps
+            dataSourceFactory.getCacheDataSource().saveApps(apps)
             Response.Success(apps)
         } catch (exception: Exception) {
             // There was an issue
@@ -23,7 +27,13 @@ constructor(
             Response.Error(exception)
         }
 
-    override suspend fun getApp(id: Long): Response<App?> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getApp(id: Long): Response<App?> =
+        try {
+            Response.Success(dataSourceFactory.getCacheDataSource().getApp(id))
+        } catch (exception: Exception) {
+            // There was an issue
+            exception.printStackTrace()
+            Log.e("CacheLayer", exception.message, exception)
+            Response.Error(exception)
+        }
 }

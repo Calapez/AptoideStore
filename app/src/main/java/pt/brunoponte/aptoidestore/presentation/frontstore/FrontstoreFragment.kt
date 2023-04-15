@@ -19,7 +19,6 @@ import pt.brunoponte.aptoidestore.presentation.frontstore.editorsAppListAdapter.
 import pt.brunoponte.aptoidestore.presentation.frontstore.topAppListAdapter.TopAppListInteraction
 import pt.brunoponte.aptoidestore.presentation.frontstore.topAppListAdapter.TopAppListAdapter
 
-
 @AndroidEntryPoint
 class FrontstoreFragment : Fragment(), TopAppListInteraction, EditorsAppListInteraction {
 
@@ -72,7 +71,7 @@ class FrontstoreFragment : Fragment(), TopAppListInteraction, EditorsAppListInte
                 it.orientation = LinearLayoutManager.HORIZONTAL
             }
 
-            recyclerView.adapter = topAppListAdapter
+            recyclerView.adapter = editorsAppListAdapter
         }
 
         setupViewModelObservers()
@@ -94,20 +93,18 @@ class FrontstoreFragment : Fragment(), TopAppListInteraction, EditorsAppListInte
                 is FrontstoreViewState.Content -> {
                     binding.loadingProgressBar.isVisible = false
                     binding.errorView.isVisible = false
-                    binding.topRecyclerView.isVisible = true
-                    binding.editorsRecyclerView.isVisible = true
+                    binding.contentView.isVisible = true
                     topAppListAdapter.submitList(viewState.apps)
+                    editorsAppListAdapter.submitList(viewState.apps)
                 }
                 is FrontstoreViewState.Error -> {
-                    binding.topRecyclerView.isVisible = false
-                    binding.editorsRecyclerView.isVisible = false
+                    binding.contentView.isVisible = false
                     binding.loadingProgressBar.isVisible = false
                     binding.errorView.isVisible = true
                 }
                 FrontstoreViewState.Loading -> {
                     binding.errorView.isVisible = false
-                    binding.topRecyclerView.isVisible = true
-                    binding.editorsRecyclerView.isVisible = true
+                    binding.contentView.isVisible = false
                     binding.loadingProgressBar.isVisible = true
                 }
             }

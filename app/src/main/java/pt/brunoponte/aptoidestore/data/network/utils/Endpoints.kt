@@ -4,7 +4,7 @@ class Endpoints {
 
     companion object {
 
-        const val aptoideApiEndpoint = "http://ws2.aptoide.com/api/6/"
+        const val aptoideApiEndpoint = "https://ws2.aptoide.com/api/6/"
 
     }
 

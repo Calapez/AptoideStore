@@ -33,13 +33,19 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:shadowColor="@color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
             tools:text="This is a very nice app with a very big name"/>
 
         <ImageView
             android:id="@+id/starImageView"
             android:layout_width="8dp"
             android:layout_height="8dp"
-            android:src="@drawable/ic_star"
+            android:src="@drawable/ic_star_white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="7dp"
@@ -55,8 +61,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             android:layout_marginStart="4dp"
-            android:textStyle="bold"
             android:textSize="8sp"
+            android:textColor="@color/white"
+            android:shadowColor="@color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
             tools:text="4.8"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

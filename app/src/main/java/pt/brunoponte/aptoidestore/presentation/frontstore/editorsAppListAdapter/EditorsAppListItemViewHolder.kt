@@ -26,7 +26,7 @@ class EditorsAppListItemViewHolder(
         }
 
         binding.appNameText.text = app.name ?: notApplicableText
-        binding.ratingLabelTextView.text = app.rating?.toString() ?: notApplicableText
+        binding.ratingLabelTextView.text = app.rating?.toString() ?: "--"
 
         binding.appCard.setOnClickListener {
             interaction.onEditorsAppClick(app.id)

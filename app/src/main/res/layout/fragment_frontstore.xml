@@ -6,64 +6,73 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.frontstore.FrontstoreFragment">
 
-    <TextView
-        android:id="@+id/editorsText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="18sp"
-        android:layout_marginTop="25dp"
-        android:layout_marginHorizontal="10dp"
-        android:text="@string/editors_choice" />
-
-    <Button
-        android:id="@+id/editorsMoreButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/editorsText"
-        app:layout_constraintBottom_toBottomOf="@id/editorsText"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="10dp"
-        android:text="@string/more"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:textColor="@color/main"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/editorsRecyclerView"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contentView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/editorsMoreButton"/>
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible">
 
-    <TextView
-        android:id="@+id/topText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/editorsRecyclerView"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="18sp"
-        android:layout_marginTop="25dp"
-        android:layout_marginHorizontal="10dp"
-        android:text="@string/top_apps" />
+        <TextView
+            android:id="@+id/editorsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="18sp"
+            android:layout_marginTop="25dp"
+            android:layout_marginHorizontal="10dp"
+            android:text="@string/editors_choice" />
 
-    <Button
-        android:id="@+id/topMoreButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/topText"
-        app:layout_constraintBottom_toBottomOf="@id/topText"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="10dp"
-        android:text="@string/more"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:textColor="@color/main"/>
+        <Button
+            android:id="@+id/editorsMoreButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/editorsText"
+            app:layout_constraintBottom_toBottomOf="@id/editorsText"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="10dp"
+            android:text="@string/more"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:textColor="@color/main"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/topRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/topMoreButton"
-        android:layout_marginBottom="25dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/editorsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/editorsMoreButton"/>
+
+        <TextView
+            android:id="@+id/topText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/editorsRecyclerView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="18sp"
+            android:layout_marginTop="25dp"
+            android:layout_marginHorizontal="10dp"
+            android:text="@string/top_apps" />
+
+        <Button
+            android:id="@+id/topMoreButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/topText"
+            app:layout_constraintBottom_toBottomOf="@id/topText"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="10dp"
+            android:text="@string/more"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:textColor="@color/main"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/topRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/topMoreButton"
+            android:layout_marginBottom="25dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ProgressBar
         android:id="@+id/loadingProgressBar"
@@ -75,13 +84,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:indeterminate="true"
         android:indeterminateTint="@color/main"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/errorView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <TextView
             android:layout_width="match_parent"

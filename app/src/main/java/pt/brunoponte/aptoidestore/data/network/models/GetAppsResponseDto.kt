@@ -15,6 +15,10 @@ data class ListAppsDto (
 )
 
 data class DatasetsDto (
+    @SerializedName("all") var all: AllDto,
+)
+
+data class AllDto (
     @SerializedName("data") var data: DataDto,
 )
 

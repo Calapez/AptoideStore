@@ -53,7 +53,7 @@ class AppDetailsFragment : Fragment() {
         when(viewState) {
             is AppDetailsViewState.Content -> {
                 binding.loadingProgressIndicator.isVisible = false
-                binding.breedDetailsView.isVisible = true
+                binding.appDetailsView.isVisible = true
 
                 viewState.app?.let {
                     val notApplicableText = getString(R.string.not_applicable)
@@ -77,10 +77,10 @@ class AppDetailsFragment : Fragment() {
             }
             is AppDetailsViewState.Error -> {
                 binding.loadingProgressIndicator.isVisible = false
-                binding.breedDetailsView.isVisible = false
+                binding.appDetailsView.isVisible = false
             }
             AppDetailsViewState.Loading -> {
-                binding.breedDetailsView.isVisible = false
+                binding.appDetailsView.isVisible = false
                 binding.loadingProgressIndicator.isVisible = true
             }
         }

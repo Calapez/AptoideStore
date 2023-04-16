@@ -12,7 +12,6 @@ data class App (
     var versionName: String?,
     var versionCode: Long?,
     var md5sum: String?,
-    var apkTags: List<String>?,
     var size: Long?,
     var downloads: Long?,
     var pDownloads: Long?,

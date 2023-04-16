@@ -17,7 +17,6 @@ class AppDtoMapper {
             versionName = dto.versionName,
             versionCode = dto.versionCode,
             md5sum = dto.md5sum,
-            apkTags = dto.apkTags,
             size = dto.size,
             downloads = dto.downloads,
             pDownloads = dto.pDownloads,

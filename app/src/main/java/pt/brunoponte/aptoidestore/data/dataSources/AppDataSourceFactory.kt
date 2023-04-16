@@ -20,7 +20,7 @@ constructor(
     }
 
     fun getCacheDataSource() : IAppDataSource {
-        return remoteDataSource
+        return cacheDataSource
     }
 
 }

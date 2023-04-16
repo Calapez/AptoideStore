@@ -1,6 +1,8 @@
 package pt.brunoponte.aptoidestore.data.cache.models
 
 import pt.brunoponte.aptoidestore.domain.models.App
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class AppEntityMapper {
 
@@ -15,13 +17,12 @@ class AppEntityMapper {
             versionName = entity.versionName,
             versionCode = entity.versionCode,
             md5sum = entity.md5sum,
-            apkTags = entity.apkTags,
             size = entity.size,
             downloads = entity.downloads,
             pDownloads = entity.pDownloads,
-            added = entity.added,
-            modified = entity.added,
-            updated = entity.added,
+            added = dateFromString(entity.added),
+            modified = dateFromString(entity.added),
+            updated = dateFromString(entity.added),
             rating = entity.rating,
             iconUrl = entity.iconUrl,
             graphicUrl = entity.graphicUrl,
@@ -37,13 +38,12 @@ class AppEntityMapper {
             versionName = model.versionName,
             versionCode = model.versionCode,
             md5sum = model.md5sum,
-            apkTags = model.apkTags,
             size = model.size,
             downloads = model.downloads,
             pDownloads = model.pDownloads,
-            added = model.added,
-            modified = model.added,
-            updated = model.added,
+            added = stringFromDate(model.added),
+            modified = stringFromDate(model.added),
+            updated = stringFromDate(model.added),
             rating = model.rating,
             iconUrl = model.iconUrl,
             graphicUrl = model.graphicUrl,
@@ -57,6 +57,12 @@ class AppEntityMapper {
         fun toDomainModelList(entityList: List<AppEntity>) = entityList.map { entity ->
             mapToDomainModel(entity)
         }
+
+        private fun dateFromString(dateString: String?) =
+            LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+
+        private fun stringFromDate(date: LocalDateTime?) =
+            date?.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
 
     }
 

@@ -12,7 +12,6 @@ data class AppDto (
     @SerializedName("vername") var versionName: String?,
     @SerializedName("vercode") var versionCode: Long?,
     @SerializedName("md5sum") var md5sum: String?,
-    @SerializedName("apk_tags") var apkTags: List<String>?,
     @SerializedName("size") var size: Long?,
     @SerializedName("downloads") var downloads: Long?,
     @SerializedName("pdownloads") var pDownloads: Long?,

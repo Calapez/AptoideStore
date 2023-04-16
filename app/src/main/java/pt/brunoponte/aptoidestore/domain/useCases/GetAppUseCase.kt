@@ -3,7 +3,7 @@ package pt.brunoponte.aptoidestore.domain.useCases
 import pt.brunoponte.aptoidestore.domain.repositories.IAppRepository
 import javax.inject.Inject
 
-class GetAppDetailsUseCase
+class GetAppUseCase
 @Inject
 constructor(
     private val appRepository: IAppRepository

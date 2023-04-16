@@ -27,9 +27,14 @@ constructor(
             Response.Error(exception)
         }
 
-    override suspend fun getApp(id: Long): Response<App?> =
+    override suspend fun getApp(id: Long): Response<App> =
         try {
-            Response.Success(dataSourceFactory.getCacheDataSource().getApp(id))
+            val app = dataSourceFactory.getCacheDataSource().getApp(id)
+            if (app == null) {
+                Response.Error(Exception("App not found"))
+            } else {
+                Response.Success(app)
+            }
         } catch (exception: Exception) {
             // There was an issue
             exception.printStackTrace()

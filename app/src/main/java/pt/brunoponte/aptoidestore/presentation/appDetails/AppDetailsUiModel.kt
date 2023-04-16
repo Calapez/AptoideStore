@@ -15,7 +15,7 @@ data class AppDetailsUiModel (
     var graphicUrl: String?,
 ) {
     fun getUpdatedDateUiString() =
-        updated?.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"))
+        updated?.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
 
     fun getSizeUiString() = size?.let { bytes ->
         if (-1000 < bytes && bytes < 1000) {

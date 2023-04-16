@@ -56,7 +56,7 @@ class AppDetailsFragment : Fragment() {
                 binding.loadingProgressIndicator.isVisible = false
                 binding.appDetailsView.isVisible = true
 
-                viewState.app?.let {
+                viewState.app.let {
                     val notApplicableText = getString(R.string.not_applicable)
 
                     Glide.with(this)

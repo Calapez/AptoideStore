@@ -30,15 +30,14 @@ constructor(
             when (response) {
                 is Response.Success -> _viewState.postValue(FrontstoreViewState
                     .Content(response.data.map {
-                        AppUiItem(
+                        AppItemUiModel(
                             it.id,
                             it.name,
-                            it.size,
-                            it.downloads,
-                            it.updated,
                             it.rating,
-                            it.graphicUrl
-                        )}))
+                            it.graphicUrl,
+                            it.iconUrl
+                        )
+                    }))
                 is Response.Error -> _viewState.postValue(FrontstoreViewState
                     .Error(response.exception.message ?: ""))
             }

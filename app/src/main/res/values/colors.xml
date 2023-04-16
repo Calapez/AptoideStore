@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="main">#ff6a32</color>
-    <color name="main_variant">#f8612a</color>
+    <color name="main">#FF6A32</color>
+    <color name="main_variant">#F8612A</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="shimmerColor">#C2C2C2</color>
+    <color name="background_color">#F5F5F5</color>
+    <color name="no_image_background_color">#D5D5D5</color>
 </resources>

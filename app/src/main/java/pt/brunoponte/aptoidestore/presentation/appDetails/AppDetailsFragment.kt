@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import dagger.hilt.android.AndroidEntryPoint
 import pt.brunoponte.aptoidestore.R
 import pt.brunoponte.aptoidestore.databinding.FragmentAppDetailsBinding
@@ -60,19 +61,23 @@ class AppDetailsFragment : Fragment() {
 
                     Glide.with(this)
                         .load(it.graphicUrl)
-                        .placeholder(R.drawable.ic_loading)
                         .error(R.drawable.ic_no_image)
+                        .transition(DrawableTransitionOptions.withCrossFade())
                         .into(binding.appImageView)
 
                     binding.appNameText.text = it.name ?: notApplicableText
 
-                    binding.ratingTextView.text = it.rating?.toString() ?: notApplicableText
+                    binding.ratingTextView.text =
+                        if (it.rating == null || it.rating == 0f)
+                            "--"
+                        else
+                            it.rating.toString()
 
-                    binding.downloadsTextView.text = it.downloads?.toString() ?: notApplicableText
+                    binding.downloadsTextView.text = it.getDownloadsUiString() ?: notApplicableText
 
-                    binding.sizeTextView.text = it.size?.toString() ?: notApplicableText
+                    binding.sizeTextView.text = it.getSizeUiString() ?: notApplicableText
 
-                    binding.lastUpdateTextView.text = it.updated?.toString() ?: notApplicableText
+                    binding.lastUpdateTextView.text = it.getUpdatedDateUiString() ?: notApplicableText
                 }
             }
             is AppDetailsViewState.Error -> {

@@ -1,12 +1,11 @@
 package pt.brunoponte.aptoidestore.presentation.frontstore.editorsAppListAdapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import pt.brunoponte.aptoidestore.databinding.EditorsAppListItemBinding
-import pt.brunoponte.aptoidestore.presentation.frontstore.AppUiItem
+import pt.brunoponte.aptoidestore.presentation.frontstore.AppItemUiModel
 
 interface EditorsAppListInteraction {
     fun onEditorsAppClick(appId: Long)
@@ -14,7 +13,7 @@ interface EditorsAppListInteraction {
 
 class EditorsAppListAdapter(
     private val interaction: EditorsAppListInteraction
-) : ListAdapter<AppUiItem, EditorsAppListItemViewHolder>(EditorsAppListAdapter) {
+) : ListAdapter<AppItemUiModel, EditorsAppListItemViewHolder>(EditorsAppListAdapter) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EditorsAppListItemViewHolder {
         val itemBinding = EditorsAppListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -25,13 +24,13 @@ class EditorsAppListAdapter(
         holder.bind(getItem(position))
     }
 
-    private companion object : DiffUtil.ItemCallback<AppUiItem>() {
+    private companion object : DiffUtil.ItemCallback<AppItemUiModel>() {
 
-        override fun areItemsTheSame(oldItem: AppUiItem, newItem: AppUiItem): Boolean {
+        override fun areItemsTheSame(oldItem: AppItemUiModel, newItem: AppItemUiModel): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: AppUiItem, newItem: AppUiItem): Boolean {
+        override fun areContentsTheSame(oldItem: AppItemUiModel, newItem: AppItemUiModel): Boolean {
             return oldItem == newItem
         }
     }

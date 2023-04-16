@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pt.brunoponte.aptoidestore.domain.Response
 import pt.brunoponte.aptoidestore.domain.useCases.GetAppDetailsUseCase
+import pt.brunoponte.aptoidestore.presentation.frontstore.AppItemUiModel
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,7 +29,17 @@ constructor(
             val response = getAppDetailsUseCase.execute(appId)
             when (response) {
                 is Response.Success -> _viewState.postValue(AppDetailsViewState
-                    .Content(response.data))
+                    .Content(response.data?.let {
+                        AppDetailsUiModel(
+                            it.id,
+                            it.name,
+                            it.size,
+                            it.downloads,
+                            it.updated,
+                            it.rating,
+                            it.graphicUrl
+                        )
+                    }))
                 is Response.Error -> _viewState.postValue(AppDetailsViewState
                     .Error(response.exception.message ?: ""))
             }

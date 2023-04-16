@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/appCard"
-    android:layout_width="270dp"
-    android:layout_height="155dp"
+    android:layout_width="327dp"
+    android:layout_height="160dp"
     app:cardCornerRadius="5dp"
     app:cardElevation="2dp"
     app:cardUseCompatPadding="true">
@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/image_content_app_thumbnail"
+            android:background="@color/no_image_background_color"
             tools:src="@color/main_variant" />
 
         <TextView
@@ -30,21 +31,21 @@
             app:layout_constraintBottom_toTopOf="@id/starImageView"
             app:layout_constraintHorizontal_bias="0"
             android:layout_marginBottom="3dp"
-            android:maxLines="1"
+            android:maxLines="2"
             android:ellipsize="end"
-            android:textSize="12sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:shadowColor="@color/black"
             android:shadowDx="1"
             android:shadowDy="1"
             android:shadowRadius="2"
-            tools:text="This is a very nice app with a very big name"/>
+            tools:text="This is a very very very very very nice app with a very big name. "/>
 
         <ImageView
             android:id="@+id/starImageView"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:src="@drawable/ic_star_white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -53,7 +54,7 @@
 
         <TextView
             android:id="@+id/ratingLabelTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/starImageView"
             app:layout_constraintBottom_toBottomOf="@id/starImageView"
@@ -61,12 +62,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             android:layout_marginStart="4dp"
-            android:textSize="8sp"
+            android:textSize="10sp"
             android:textColor="@color/white"
             android:shadowColor="@color/black"
             android:shadowDx="1"
             android:shadowDy="1"
-            android:shadowRadius="2"
+            android:shadowRadius="1"
             tools:text="4.8"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

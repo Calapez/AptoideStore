@@ -8,7 +8,6 @@ plugins {
 }
 
 android {
-    namespace 'pt.brunoponte.aptoidestore'
     compileSdk 33
 
     defaultConfig {
@@ -18,7 +17,8 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // Replace com.example.android.dagger with your class path.
+        testInstrumentationRunner = "pt.brunoponte.aptoidestore.helpers.CustomTestRunner"
     }
 
     buildTypes {
@@ -30,6 +30,9 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    testOptions {
+        animationsDisabled = true
     }
     kotlinOptions {
         jvmTarget = '1.8'

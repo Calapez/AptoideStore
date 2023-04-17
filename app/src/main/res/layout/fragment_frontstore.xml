@@ -111,11 +111,12 @@
         tools:visibility="visible">
 
         <TextView
+            android:id="@+id/errorText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:layout_margin="20dp"
-            android:text="@string/error_loading_apps" />
+            tools:text="@string/error_loading_apps" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

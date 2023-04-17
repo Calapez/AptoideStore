@@ -97,12 +97,14 @@ class FrontstoreFragment : Fragment(), TopAppListInteraction, EditorsAppListInte
                     topAppListAdapter.submitList(viewState.apps)
                     editorsAppListAdapter.submitList(viewState.apps)
                 }
+
                 is FrontstoreViewState.Error -> {
                     binding.contentView.isVisible = false
                     binding.loadingProgressBar.isVisible = false
                     binding.errorView.isVisible = true
                     binding.errorText.text = viewState.errorMsg
                 }
+
                 FrontstoreViewState.Loading -> {
                     binding.errorView.isVisible = false
                     binding.contentView.isVisible = false

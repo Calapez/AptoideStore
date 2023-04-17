@@ -6,7 +6,7 @@ import pt.brunoponte.aptoidestore.data.cache.utils.CachePreferencesHelper
 import pt.brunoponte.aptoidestore.domain.models.App
 import javax.inject.Inject
 
-class CacheDataSource
+class LocalDataSource
 @Inject
 constructor(
     private val appDao: AppDao,
@@ -23,30 +23,30 @@ constructor(
 
     override suspend fun saveApps(apps: List<App>) {
         appDao.insertApps(AppEntityMapper.toEntityList(apps))
-        setLastCacheTime(System.currentTimeMillis())
+        setLastCacheUpdateTime(System.currentTimeMillis())
     }
 
     override suspend fun areAppsCached(): Boolean {
         return getApps().isNotEmpty()
     }
 
-    fun isExpired(): Boolean {
+    fun isCacheExpired(): Boolean {
         val currentTime = System.currentTimeMillis()
-        val lastUpdateTime = getLastCacheUpdateTimeMillis()
+        val lastUpdateTime = getLastCacheUpdateTime()
         return currentTime - lastUpdateTime > EXPIRATION_TIME
     }
 
     /**
      * Set in millis, the last time the cache was updated.
      */
-    private fun setLastCacheTime(lastCache: Long) {
+    private fun setLastCacheUpdateTime(lastCache: Long) {
         preferencesHelper.lastCacheTime = lastCache
     }
 
     /**
      * Get in millis, the last time the cache was updated.
      */
-    private fun getLastCacheUpdateTimeMillis(): Long {
+    private fun getLastCacheUpdateTime(): Long {
         return preferencesHelper.lastCacheTime
     }
 

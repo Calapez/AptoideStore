@@ -1,6 +1,5 @@
 package pt.brunoponte.aptoidestore.presentation.appDetails
 
-import pt.brunoponte.aptoidestore.domain.models.App
 
 sealed class AppDetailsViewState {
 

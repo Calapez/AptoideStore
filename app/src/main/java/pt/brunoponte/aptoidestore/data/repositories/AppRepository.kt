@@ -15,7 +15,7 @@ constructor(
     override suspend fun getApps(): Response<List<App>> =
         try {
             val isCached = dataSourceFactory.getCacheDataSource().areAppsCached()
-            // Get breeds from the proper source
+            // Get apps from the proper source
             val apps = dataSourceFactory.getDataSource(isCached).getApps()
             // Save apps
             dataSourceFactory.getCacheDataSource().saveApps(apps)
@@ -23,12 +23,13 @@ constructor(
         } catch (exception: Exception) {
             // There was an issue
             exception.printStackTrace()
-            Log.e("NetworkLayer", exception.message, exception)
+            Log.e(::getApps.name, exception.message, exception)
             Response.Error(exception)
         }
 
     override suspend fun getApp(id: Long): Response<App> =
         try {
+            // Get app from cache
             val app = dataSourceFactory.getCacheDataSource().getApp(id)
             if (app == null) {
                 Response.Error(Exception("App not found"))
@@ -38,7 +39,7 @@ constructor(
         } catch (exception: Exception) {
             // There was an issue
             exception.printStackTrace()
-            Log.e("CacheLayer", exception.message, exception)
+            Log.e(::getApp.name, exception.message, exception)
             Response.Error(exception)
         }
 }

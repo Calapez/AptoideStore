@@ -45,7 +45,7 @@ class AppDetailsViewModelTest {
     }
 
     @Test
-    fun `get app`() {
+    fun `get app returns success`() {
         val getAppResult = App(
             1,
             "Name1",
@@ -89,7 +89,7 @@ class AppDetailsViewModelTest {
     }
 
     @Test
-    fun `get app error`() {
+    fun `get app returns error`() {
         val getAppErrorException = Exception("Some message")
 
         runBlocking {

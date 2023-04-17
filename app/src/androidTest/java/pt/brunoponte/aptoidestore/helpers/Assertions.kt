@@ -10,7 +10,6 @@ import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.`is`
 
-
 class RecyclerViewItemCountAssertion private constructor(matcher: Matcher<Int>) :
     ViewAssertion {
     private val matcher: Matcher<Int>

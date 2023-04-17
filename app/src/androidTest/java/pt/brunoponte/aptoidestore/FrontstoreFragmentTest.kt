@@ -45,7 +45,7 @@ class FrontstoreFragmentTest {
     }
 
     @Test
-    fun testFrontstoreInitialState() {
+    fun testLoadedApps() {
         launchFragmentInHiltContainer<FrontstoreFragment>(Bundle(), R.style.Theme_AptoideStore) {
             fragment = (this as FrontstoreFragment)
         }

@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import javax.inject.Inject
 
+/**
+ * Class used to manipulate Shared Preferences.
+ */
 open class CachePreferencesHelper
 @Inject
 constructor(context: Context) {

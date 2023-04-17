@@ -3,17 +3,11 @@ package pt.brunoponte.aptoidestore.helpers
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.ImageView
-import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
-import androidx.core.graphics.drawable.toBitmap
 import androidx.core.util.Preconditions
 import androidx.fragment.app.Fragment
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
-import org.hamcrest.Description
-import org.hamcrest.TypeSafeMatcher
 import pt.brunoponte.aptoidestore.HiltTestActivity
 
 inline fun <reified T : Fragment> launchFragmentInHiltContainer(
@@ -43,18 +37,5 @@ inline fun <reified T : Fragment> launchFragmentInHiltContainer(
             .commitNow()
 
         fragment.action()
-    }
-}
-
-fun withDrawable(@DrawableRes id: Int) = object : TypeSafeMatcher<View>() {
-    override fun describeTo(description: Description) {
-        description.appendText("ImageView with drawable same as drawable with id $id")
-    }
-
-    override fun matchesSafely(view: View): Boolean {
-        val context = view.context
-        val expectedBitmap = context.getDrawable(id)?.toBitmap()
-
-        return view is ImageView && view.drawable.toBitmap().sameAs(expectedBitmap)
     }
 }

@@ -4,13 +4,14 @@ import pt.brunoponte.aptoidestore.domain.models.App
 
 interface IDataSource {
 
-    // Remote and Cache
+    // Remote and Local data sources
     suspend fun getApps(): List<App>
 
-    // Cache only
+    // Local data source only
     suspend fun getApp(appId: Long): App?
 
     suspend fun saveApps(apps: List<App>)
+
     suspend fun areAppsCached(): Boolean
 
 }

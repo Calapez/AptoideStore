@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 import javax.inject.Inject
 
 /**
- * Implementation of a remote data source with static access to the data for easy testing.
+ * Implementation of Repository with hardcoded data for easy testing.
  */
 class FakeAppRepository @Inject constructor() : IAppRepository {
 

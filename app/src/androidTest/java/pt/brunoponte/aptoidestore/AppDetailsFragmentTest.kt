@@ -23,7 +23,7 @@ import pt.brunoponte.aptoidestore.presentation.appDetails.AppDetailsViewState
 @HiltAndroidTest
 class AppDetailsFragmentTest {
 
-    lateinit var fragment: AppDetailsFragment
+    private lateinit var fragment: AppDetailsFragment
 
     @get:Rule
     val instantTaskExecutionRule: InstantTaskExecutorRule = InstantTaskExecutorRule()
@@ -37,7 +37,7 @@ class AppDetailsFragmentTest {
     }
 
     @Test
-    fun testAppDetails() {
+    fun testAppLoaded() {
         val fragmentArgs = bundleOf("appId" to 1L)
         launchFragmentInHiltContainer<AppDetailsFragment>(fragmentArgs, R.style.Theme_AptoideStore) {
             fragment = (this as AppDetailsFragment)

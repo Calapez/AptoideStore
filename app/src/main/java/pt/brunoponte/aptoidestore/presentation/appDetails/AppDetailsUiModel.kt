@@ -5,6 +5,9 @@ import java.text.StringCharacterIterator
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
+/**
+ * A representation of the App class, with only the necessary attributes for the UI
+ */
 data class AppDetailsUiModel (
     var id: Long,
     var name: String?,

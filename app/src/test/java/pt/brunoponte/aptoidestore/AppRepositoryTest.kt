@@ -79,9 +79,11 @@ class AppRepositoryTest {
     @Test
     fun `get apps cached`() {
         runBlocking {
+            // Must mock twice for chained method calls
             Mockito.`when`(dataSourceFactory.getCacheDataSource()).thenReturn(appDataSource)
             Mockito.`when`(appDataSource.areAppsCached()).thenReturn(true)
 
+            // Must mock twice for chained method calls
             Mockito.`when`(dataSourceFactory.getDataSource(true)).thenReturn(appDataSource)
             Mockito.`when`(appDataSource.getApps()).thenReturn(appList)
 
@@ -94,9 +96,11 @@ class AppRepositoryTest {
     @Test
     fun `get apps no cache`() {
         runBlocking {
+            // Must mock twice for chained method calls
             Mockito.`when`(dataSourceFactory.getCacheDataSource()).thenReturn(appDataSource)
             Mockito.`when`(appDataSource.areAppsCached()).thenReturn(false)
 
+            // Must mock twice for chained method calls
             Mockito.`when`(dataSourceFactory.getDataSource(false)).thenReturn(appDataSource)
             Mockito.`when`(appDataSource.getApps()).thenReturn(appList)
 
@@ -143,6 +147,7 @@ class AppRepositoryTest {
         )
 
         runBlocking {
+            // Must mock twice for chained method calls
             Mockito.`when`(dataSourceFactory.getCacheDataSource()).thenReturn(appDataSource)
             Mockito.`when`(appDataSource.getApp(returnedApp.id)).thenReturn(returnedApp)
 
@@ -155,6 +160,7 @@ class AppRepositoryTest {
     @Test
     fun `get app not found`() {
         runBlocking {
+            // Must mock twice for chained method calls
             Mockito.`when`(dataSourceFactory.getCacheDataSource()).thenReturn(appDataSource)
             Mockito.`when`(appDataSource.getApp(1)).thenReturn(null)
 

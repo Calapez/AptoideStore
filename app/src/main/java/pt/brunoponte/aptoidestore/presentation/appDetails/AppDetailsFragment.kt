@@ -81,12 +81,14 @@ class AppDetailsFragment : Fragment() {
                     binding.lastUpdateTextView.text = it.getUpdatedDateUiString() ?: notApplicableText
                 }
             }
+
             is AppDetailsViewState.Error -> {
                 binding.loadingProgressIndicator.isVisible = false
                 binding.contentView.isVisible = false
                 binding.errorView.isVisible = true
                 binding.errorText.text = viewState.errorMsg
             }
+
             AppDetailsViewState.Loading -> {
                 binding.contentView.isVisible = false
                 binding.errorView.isVisible = false

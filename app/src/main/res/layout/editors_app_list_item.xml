@@ -67,7 +67,7 @@
             android:shadowColor="@color/black"
             android:shadowDx="1"
             android:shadowDy="1"
-            android:shadowRadius="1"
+            android:shadowRadius="7"
             tools:text="4.8"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

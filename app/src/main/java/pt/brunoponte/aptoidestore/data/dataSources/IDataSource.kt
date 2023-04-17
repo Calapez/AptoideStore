@@ -2,7 +2,7 @@ package pt.brunoponte.aptoidestore.data.dataSources
 
 import pt.brunoponte.aptoidestore.domain.models.App
 
-interface IAppDataSource {
+interface IDataSource {
 
     // Remote and Cache
     suspend fun getApps(): List<App>

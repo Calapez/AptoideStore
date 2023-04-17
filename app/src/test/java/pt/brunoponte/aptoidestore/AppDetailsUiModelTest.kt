@@ -1,26 +1,10 @@
 package pt.brunoponte.aptoidestore
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import junit.framework.Assert.assertEquals
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.mockito.Mock
-import org.mockito.Mockito
-import org.mockito.MockitoAnnotations
-import pt.brunoponte.aptoidestore.domain.Response
-import pt.brunoponte.aptoidestore.domain.models.App
-import pt.brunoponte.aptoidestore.domain.useCases.GetAppUseCase
 import pt.brunoponte.aptoidestore.presentation.appDetails.AppDetailsUiModel
-import pt.brunoponte.aptoidestore.presentation.appDetails.AppDetailsViewModel
-import pt.brunoponte.aptoidestore.presentation.appDetails.AppDetailsViewState
-import pt.brunoponte.aptoidestore.presentation.frontstore.AppItemUiModel
-import pt.brunoponte.aptoidestore.presentation.frontstore.FrontstoreViewState
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 

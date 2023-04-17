@@ -1,18 +1,24 @@
 package pt.brunoponte.aptoidestore.data.dataSources
 
-import pt.brunoponte.aptoidestore.data.network.IAppRemote
+import pt.brunoponte.aptoidestore.data.network.IRequestService
 import pt.brunoponte.aptoidestore.data.network.models.AppDtoMapper
 import pt.brunoponte.aptoidestore.domain.models.App
 import javax.inject.Inject
 
-class AppRemoteDataSource
+class RemoteDataSource
 @Inject
 constructor(
-    private val appRemote: IAppRemote
-): IAppDataSource {
+    private val requestService: IRequestService
+): IDataSource {
 
     override suspend fun getApps(): List<App> {
-        return AppDtoMapper.toDomainModelList(appRemote.getApps())
+        return AppDtoMapper.toDomainModelList(requestService.getApps()
+            .responses
+            .listApps
+            .datasets
+            .all
+            .data
+            .list)
     }
 
     override suspend fun getApp(appId: Long): App? {

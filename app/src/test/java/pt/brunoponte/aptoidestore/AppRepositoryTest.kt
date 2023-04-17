@@ -9,8 +9,8 @@ import org.junit.runners.JUnit4
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
-import pt.brunoponte.aptoidestore.data.dataSources.AppDataSourceFactory
-import pt.brunoponte.aptoidestore.data.dataSources.IAppDataSource
+import pt.brunoponte.aptoidestore.data.dataSources.DataSourceFactory
+import pt.brunoponte.aptoidestore.data.dataSources.IDataSource
 import pt.brunoponte.aptoidestore.data.repositories.AppRepository
 import pt.brunoponte.aptoidestore.domain.Response
 import pt.brunoponte.aptoidestore.domain.models.App
@@ -65,10 +65,10 @@ class AppRepositoryTest {
     private lateinit var repository: AppRepository
 
     @Mock
-    lateinit var dataSourceFactory: AppDataSourceFactory
+    lateinit var dataSourceFactory: DataSourceFactory
 
     @Mock
-    lateinit var appDataSource: IAppDataSource
+    lateinit var appDataSource: IDataSource
 
     @Before
     fun setup() {

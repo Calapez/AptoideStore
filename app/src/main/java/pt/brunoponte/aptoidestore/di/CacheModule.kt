@@ -7,8 +7,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import pt.brunoponte.aptoidestore.data.cache.AppCache
-import pt.brunoponte.aptoidestore.data.cache.IAppCache
 import pt.brunoponte.aptoidestore.data.cache.daos.AppDao
 import pt.brunoponte.aptoidestore.data.cache.database.AptoideStoreDatabase
 import pt.brunoponte.aptoidestore.data.cache.utils.CachePreferencesHelper
@@ -35,12 +33,6 @@ class CacheModule {
     @Provides
     fun provideAppDao(db: AptoideStoreDatabase): AppDao {
         return db.appDao()
-    }
-
-    @Provides
-    @Singleton
-    fun provideAppCache(appCache: AppCache): IAppCache {
-        return appCache
     }
 
     @Provides

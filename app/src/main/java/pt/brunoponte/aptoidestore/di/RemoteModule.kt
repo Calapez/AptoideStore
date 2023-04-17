@@ -4,8 +4,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import pt.brunoponte.aptoidestore.data.network.AppRemote
-import pt.brunoponte.aptoidestore.data.network.IAppRemote
 import pt.brunoponte.aptoidestore.data.network.IRequestService
 import pt.brunoponte.aptoidestore.data.network.utils.Endpoints
 import retrofit2.Retrofit
@@ -24,11 +22,5 @@ object RemoteModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(IRequestService::class.java)
-    }
-
-    @Provides
-    @Singleton
-    fun provideAppRemote(appRemote: AppRemote): IAppRemote {
-        return appRemote
     }
 }

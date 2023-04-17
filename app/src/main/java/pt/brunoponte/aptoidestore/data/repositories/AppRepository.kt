@@ -1,7 +1,7 @@
 package pt.brunoponte.aptoidestore.data.repositories
 
 import android.util.Log
-import pt.brunoponte.aptoidestore.data.dataSources.AppDataSourceFactory
+import pt.brunoponte.aptoidestore.data.dataSources.DataSourceFactory
 import pt.brunoponte.aptoidestore.domain.Response
 import pt.brunoponte.aptoidestore.domain.models.App
 import pt.brunoponte.aptoidestore.domain.repositories.IAppRepository
@@ -10,7 +10,7 @@ import javax.inject.Inject
 class AppRepository
 @Inject
 constructor(
-    private val dataSourceFactory: AppDataSourceFactory
+    private val dataSourceFactory: DataSourceFactory
 ) : IAppRepository {
     override suspend fun getApps(): Response<List<App>> =
         try {

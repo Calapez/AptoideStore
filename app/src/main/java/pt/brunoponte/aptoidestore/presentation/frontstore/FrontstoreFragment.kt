@@ -9,6 +9,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -74,7 +75,9 @@ class FrontstoreFragment : Fragment(), TopAppListInteraction, EditorsAppListInte
             recyclerView.adapter = editorsAppListAdapter
         }
 
-        setupViewModelObservers()
+        lifecycleScope.launchWhenResumed {
+            setupViewModelObservers()
+        }
     }
 
     override fun onEditorsAppClick(appId: Long) {
@@ -87,8 +90,8 @@ class FrontstoreFragment : Fragment(), TopAppListInteraction, EditorsAppListInte
         findNavController().navigate(action)
     }
 
-    private fun setupViewModelObservers() {
-        viewModel.viewState.observe(viewLifecycleOwner) { viewState ->
+    private suspend fun setupViewModelObservers() {
+        viewModel.viewState.collect { viewState ->
             when(viewState) {
                 is FrontstoreViewState.Content -> {
                     binding.loadingProgressBar.isVisible = false

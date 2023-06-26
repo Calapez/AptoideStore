@@ -6,8 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import pt.brunoponte.aptoidestore.domain.Response
 import pt.brunoponte.aptoidestore.domain.useCases.GetAppListUseCase
@@ -21,29 +19,27 @@ constructor(
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    private val _viewState = MutableStateFlow<FrontstoreViewState>(FrontstoreViewState.Loading)
-    val viewState: StateFlow<FrontstoreViewState>
+    private val _viewState = MutableLiveData<FrontstoreViewState>()
+    val viewState: LiveData<FrontstoreViewState>
         get() = _viewState
 
     fun getApps() {
         viewModelScope.launch(dispatcher) {
-            _viewState.value = FrontstoreViewState.Loading
+            _viewState.postValue(FrontstoreViewState.Loading)
             val response = getAppListUseCase.execute()
             when (response) {
-                is Response.Success ->
-                    _viewState.value = FrontstoreViewState
-                        .Content(response.data.map {
-                            AppItemUiModel(
-                                it.id,
-                                it.name,
-                                it.rating,
-                                it.graphicUrl,
-                                it.iconUrl
-                            )
-                        })
-                is Response.Error ->
-                    _viewState.value = FrontstoreViewState
-                        .Error(response.exception.message ?: "")
+                is Response.Success -> _viewState.postValue(FrontstoreViewState
+                    .Content(response.data.map {
+                        AppItemUiModel(
+                            it.id,
+                            it.name,
+                            it.rating,
+                            it.graphicUrl,
+                            it.iconUrl
+                        )
+                    }))
+                is Response.Error -> _viewState.postValue(FrontstoreViewState
+                    .Error(response.exception.message ?: ""))
             }
         }
     }

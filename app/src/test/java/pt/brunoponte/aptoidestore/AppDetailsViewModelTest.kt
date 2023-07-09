@@ -17,14 +17,14 @@ import pt.brunoponte.aptoidestore.domain.Response
 import pt.brunoponte.aptoidestore.domain.models.App
 import pt.brunoponte.aptoidestore.domain.useCases.GetAppUseCase
 import pt.brunoponte.aptoidestore.presentation.appDetails.AppDetailsUiModel
-import pt.brunoponte.aptoidestore.presentation.appDetails.AppDetailsViewModel
+import pt.brunoponte.aptoidestore.presentation.appDetails.AppDetailsPresenter
 import pt.brunoponte.aptoidestore.presentation.appDetails.AppDetailsViewState
 import java.time.LocalDateTime
 
 @RunWith(JUnit4::class)
 class AppDetailsViewModelTest {
 
-    lateinit var viewModel: AppDetailsViewModel
+    lateinit var viewModel: AppDetailsPresenter
 
     @Mock
     lateinit var getAppUseCase: GetAppUseCase
@@ -39,7 +39,7 @@ class AppDetailsViewModelTest {
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        viewModel = AppDetailsViewModel(getAppUseCase, testDispatcher)
+        viewModel = AppDetailsPresenter(getAppUseCase, testDispatcher)
     }
 
     @Test

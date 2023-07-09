@@ -8,23 +8,23 @@ import android.view.ViewGroup
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 import pt.brunoponte.aptoidestore.R
 import pt.brunoponte.aptoidestore.databinding.FragmentAppDetailsBinding
-import pt.brunoponte.aptoidestore.domain.models.App
 import pt.brunoponte.aptoidestore.presentation.UIHelper
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class AppDetailsFragment : Fragment() {
+class AppDetailsFragment : Fragment(), AppDetailsContract.View {
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    val viewModel: AppDetailsViewModel by viewModels()
+    @Inject
+    lateinit var presenter: AppDetailsContract.Presenter
 
     private lateinit var binding: FragmentAppDetailsBinding
     private val args: AppDetailsFragmentArgs by navArgs()
@@ -42,63 +42,64 @@ class AppDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        presenter.setView(this)
+
         val appId = args.appId
-        viewModel.getAppFromId(appId)
+        presenter.setAppId(appId)
+    }
 
-        lifecycleScope.launchWhenResumed {
-            setupViewModelObservers()
+    override fun onDestroyView() {
+        presenter.onDestroy()
+        super.onDestroyView()
+    }
+
+    override fun setLoading(enabled: Boolean) {
+        activity?.runOnUiThread {
+            binding.loadingProgressBar.isVisible = enabled
         }
     }
 
-    private suspend fun setupViewModelObservers() {
-        // Parse view state to show appropriate content
-        viewModel.viewState.collect { viewState ->
-            // If has message to show, show Snackbar
-            viewState.message?.let { message ->
-                UIHelper.showSnackbar(
-                    binding.root,
-                    message,
-                    Snackbar.LENGTH_SHORT,
-                    { viewModel.onMessageClosed() }
-                )
-            }
-
-            // If is loading, show loading indicator
-            binding.loadingProgressBar.isVisible = viewState.isLoading
-
-
-            // If has app, show it
-            if (viewState.app == null) {
+    override fun setApp(app: AppDetailsUiModel?) {
+        activity?.runOnUiThread {
+            if (app == null) {
                 binding.contentView.isVisible = false
-            } else  {
-                binding.contentView.isVisible = true
-                fillAppUi(viewState.app)
+                return@runOnUiThread
             }
+
+            binding.contentView.isVisible = true
+
+            val notApplicableText = getString(R.string.not_applicable)
+
+            Glide.with(this@AppDetailsFragment)
+                .load(app.graphicUrl)
+                .error(R.drawable.ic_no_image)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(binding.appImageView)
+
+            binding.appNameText.text = app.name ?: notApplicableText
+
+            binding.ratingTextView.text =
+                if (app.rating == null || app.rating == 0f)
+                    "--"
+                else
+                    app.rating.toString()
+
+            binding.downloadsTextView.text = app.getDownloadsUiString() ?: notApplicableText
+
+            binding.sizeTextView.text = app.getSizeUiString() ?: notApplicableText
+
+            binding.lastUpdateTextView.text = app.getUpdatedDateUiString() ?: notApplicableText
         }
     }
 
-    private fun fillAppUi(app: AppDetailsUiModel) {
-        val notApplicableText = getString(R.string.not_applicable)
-
-        Glide.with(this)
-            .load(app.graphicUrl)
-            .error(R.drawable.ic_no_image)
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .into(binding.appImageView)
-
-        binding.appNameText.text = app.name ?: notApplicableText
-
-        binding.ratingTextView.text =
-            if (app.rating == null || app.rating == 0f)
-                "--"
-            else
-                app.rating.toString()
-
-        binding.downloadsTextView.text = app.getDownloadsUiString() ?: notApplicableText
-
-        binding.sizeTextView.text = app.getSizeUiString() ?: notApplicableText
-
-        binding.lastUpdateTextView.text = app.getUpdatedDateUiString() ?: notApplicableText
+    override fun setMessage(message: String) {
+        activity?.runOnUiThread {
+            UIHelper.showSnackbar(
+                binding.root,
+                message,
+                Snackbar.LENGTH_SHORT
+            ) { presenter.onMessageClosed() }
+        }
     }
 
 }

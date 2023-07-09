@@ -13,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import pt.brunoponte.aptoidestore.databinding.FragmentFrontstoreBinding
@@ -102,9 +101,8 @@ class FrontstoreFragment : Fragment(), TopAppListInteraction, EditorsAppListInte
                 UIHelper.showSnackbar(
                     binding.root,
                     message,
-                    Snackbar.LENGTH_SHORT,
-                    { viewModel.onMessageClosed() }
-                )
+                    Snackbar.LENGTH_SHORT
+                ) { viewModel.onMessageClosed() }
             }
 
             // If is loading, show loading indicator

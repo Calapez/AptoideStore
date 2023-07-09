@@ -1,7 +1,8 @@
 package pt.brunoponte.aptoidestore.data.dataSources
 
 import pt.brunoponte.aptoidestore.data.network.IRequestService
-import pt.brunoponte.aptoidestore.data.network.models.AppDtoMapper
+import pt.brunoponte.aptoidestore.data.network.dtos.NetworkAppMapper
+import pt.brunoponte.aptoidestore.data.network.dtos.NetworkAppMapper.Companion.asDomainModelList
 import pt.brunoponte.aptoidestore.domain.models.App
 import javax.inject.Inject
 
@@ -12,13 +13,14 @@ constructor(
 ): IDataSource {
 
     override suspend fun getApps(): List<App> {
-        return AppDtoMapper.toDomainModelList(requestService.getApps()
+        return requestService.getApps()
             .responses
             .listApps
             .datasets
             .all
             .data
-            .list)
+            .list
+            .asDomainModelList()
     }
 
     override suspend fun getApp(appId: Long): App? {

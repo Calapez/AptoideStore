@@ -1,10 +1,10 @@
-package pt.brunoponte.aptoidestore.data.cache.daos
+package pt.brunoponte.aptoidestore.data.local.daos
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import pt.brunoponte.aptoidestore.data.cache.models.AppEntity
+import pt.brunoponte.aptoidestore.data.local.entities.AppEntity
 
 @Dao
 interface AppDao {

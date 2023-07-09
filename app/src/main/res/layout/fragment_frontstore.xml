@@ -103,21 +103,4 @@
         android:visibility="gone"
         tools:visibility="visible"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/errorView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        tools:visibility="visible">
-
-        <TextView
-            android:id="@+id/errorText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_margin="20dp"
-            tools:text="@string/error_loading_apps" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

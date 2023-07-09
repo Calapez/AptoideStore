@@ -7,9 +7,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import pt.brunoponte.aptoidestore.data.cache.daos.AppDao
-import pt.brunoponte.aptoidestore.data.cache.database.AptoideStoreDatabase
-import pt.brunoponte.aptoidestore.data.cache.utils.CachePreferencesHelper
+import pt.brunoponte.aptoidestore.data.local.daos.AppDao
+import pt.brunoponte.aptoidestore.data.local.AptoideStoreDatabase
+import pt.brunoponte.aptoidestore.data.local.utils.CachePreferencesHelper
 import javax.inject.Singleton
 
 @Module

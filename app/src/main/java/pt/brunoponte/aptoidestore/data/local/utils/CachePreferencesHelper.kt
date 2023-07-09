@@ -1,4 +1,4 @@
-package pt.brunoponte.aptoidestore.data.cache.utils
+package pt.brunoponte.aptoidestore.data.local.utils
 
 import android.content.Context
 import android.content.SharedPreferences

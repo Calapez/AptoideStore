@@ -1,9 +1,9 @@
-package pt.brunoponte.aptoidestore.data.cache.database
+package pt.brunoponte.aptoidestore.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import pt.brunoponte.aptoidestore.data.cache.daos.AppDao
-import pt.brunoponte.aptoidestore.data.cache.models.AppEntity
+import pt.brunoponte.aptoidestore.data.local.daos.AppDao
+import pt.brunoponte.aptoidestore.data.local.entities.AppEntity
 
 @Database(
     entities = [AppEntity::class],

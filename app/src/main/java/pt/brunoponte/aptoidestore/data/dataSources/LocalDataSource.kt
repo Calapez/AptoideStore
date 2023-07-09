@@ -1,8 +1,11 @@
 package pt.brunoponte.aptoidestore.data.dataSources
 
-import pt.brunoponte.aptoidestore.data.cache.daos.AppDao
-import pt.brunoponte.aptoidestore.data.cache.models.AppEntityMapper
-import pt.brunoponte.aptoidestore.data.cache.utils.CachePreferencesHelper
+import pt.brunoponte.aptoidestore.data.local.daos.AppDao
+import pt.brunoponte.aptoidestore.data.local.entities.AppEntityMapper
+import pt.brunoponte.aptoidestore.data.local.entities.AppEntityMapper.Companion.asDomainModel
+import pt.brunoponte.aptoidestore.data.local.entities.AppEntityMapper.Companion.asDomainModelList
+import pt.brunoponte.aptoidestore.data.local.entities.AppEntityMapper.Companion.asEntityList
+import pt.brunoponte.aptoidestore.data.local.utils.CachePreferencesHelper
 import pt.brunoponte.aptoidestore.domain.models.App
 import javax.inject.Inject
 
@@ -13,16 +16,15 @@ constructor(
     private val preferencesHelper: CachePreferencesHelper
 ): IDataSource {
     override suspend fun getApps(): List<App> {
-        val appEntities = appDao.getApps()
-        return AppEntityMapper.toDomainModelList(appEntities)
+        return appDao.getApps().asDomainModelList()
     }
 
     override suspend fun getApp(appId: Long): App? {
-        return appDao.getApp(appId)?.let { AppEntityMapper.mapToDomainModel(it) }
+        return appDao.getApp(appId)?.asDomainModel()
     }
 
     override suspend fun saveApps(apps: List<App>) {
-        appDao.insertApps(AppEntityMapper.toEntityList(apps))
+        appDao.insertApps(apps.asEntityList())
         setLastCacheUpdateTime(System.currentTimeMillis())
     }
 

@@ -1,9 +1,9 @@
-package pt.brunoponte.aptoidestore.data.network.models
+package pt.brunoponte.aptoidestore.data.network.dtos
 
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-data class AppDto (
+data class NetworkApp (
     @SerializedName("id") var id: Long,
     @SerializedName("name") var name: String?,
     @SerializedName("package") var appPackage: String?,

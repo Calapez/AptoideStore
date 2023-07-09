@@ -9,11 +9,15 @@ import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import pt.brunoponte.aptoidestore.databinding.FragmentFrontstoreBinding
+import pt.brunoponte.aptoidestore.presentation.UIHelper
 import pt.brunoponte.aptoidestore.presentation.frontstore.editorsAppListAdapter.EditorsAppListAdapter
 import pt.brunoponte.aptoidestore.presentation.frontstore.editorsAppListAdapter.EditorsAppListInteraction
 import pt.brunoponte.aptoidestore.presentation.frontstore.topAppListAdapter.TopAppListInteraction
@@ -74,7 +78,9 @@ class FrontstoreFragment : Fragment(), TopAppListInteraction, EditorsAppListInte
             recyclerView.adapter = editorsAppListAdapter
         }
 
-        setupViewModelObservers()
+        lifecycleScope.launchWhenResumed {
+            setupViewModelObservers()
+        }
     }
 
     override fun onEditorsAppClick(appId: Long) {
@@ -87,29 +93,31 @@ class FrontstoreFragment : Fragment(), TopAppListInteraction, EditorsAppListInte
         findNavController().navigate(action)
     }
 
-    private fun setupViewModelObservers() {
-        viewModel.viewState.observe(viewLifecycleOwner) { viewState ->
-            when(viewState) {
-                is FrontstoreViewState.Content -> {
-                    binding.loadingProgressBar.isVisible = false
-                    binding.errorView.isVisible = false
-                    binding.contentView.isVisible = true
-                    topAppListAdapter.submitList(viewState.apps)
-                    editorsAppListAdapter.submitList(viewState.apps)
-                }
+    private suspend fun setupViewModelObservers() {
+        // Parse view state to show appropriate content
+        viewModel.viewState.collect { viewState ->
 
-                is FrontstoreViewState.Error -> {
-                    binding.contentView.isVisible = false
-                    binding.loadingProgressBar.isVisible = false
-                    binding.errorView.isVisible = true
-                    binding.errorText.text = viewState.errorMsg
-                }
+            // If has message to show, show Snackbar
+            viewState.message?.let { message ->
+                UIHelper.showSnackbar(
+                    binding.root,
+                    message,
+                    Snackbar.LENGTH_SHORT,
+                    { viewModel.onMessageClosed() }
+                )
+            }
 
-                FrontstoreViewState.Loading -> {
-                    binding.errorView.isVisible = false
-                    binding.contentView.isVisible = false
-                    binding.loadingProgressBar.isVisible = true
-                }
+            // If is loading, show loading indicator
+            binding.loadingProgressBar.isVisible = viewState.isLoading
+
+
+            // If has apps, show them
+            if (viewState.apps == null) {
+                binding.contentView.isVisible = false
+            } else  {
+                binding.contentView.isVisible = true
+                topAppListAdapter.submitList(viewState.apps)
+                editorsAppListAdapter.submitList(viewState.apps)
             }
         }
     }

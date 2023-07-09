@@ -1,9 +1,8 @@
-package pt.brunoponte.aptoidestore.data.cache.models
+package pt.brunoponte.aptoidestore.data.local.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.time.LocalDateTime
 
 
 @Entity(tableName = "apps")

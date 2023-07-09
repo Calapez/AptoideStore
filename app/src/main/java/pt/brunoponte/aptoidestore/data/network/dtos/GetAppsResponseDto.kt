@@ -1,4 +1,4 @@
-package pt.brunoponte.aptoidestore.data.network.models
+package pt.brunoponte.aptoidestore.data.network.dtos
 
 import com.google.gson.annotations.SerializedName
 
@@ -23,5 +23,5 @@ data class AllDto (
 )
 
 data class DataDto (
-    @SerializedName("list") var list: List<AppDto>,
+    @SerializedName("list") var list: List<NetworkApp>,
 )

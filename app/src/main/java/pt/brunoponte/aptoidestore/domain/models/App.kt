@@ -1,7 +1,6 @@
 package pt.brunoponte.aptoidestore.domain.models
 
 import java.time.LocalDateTime
-import java.util.*
 
 data class App (
     var id: Long,

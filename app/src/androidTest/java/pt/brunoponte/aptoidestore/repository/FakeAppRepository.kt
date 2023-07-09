@@ -82,7 +82,7 @@ class FakeAppRepository @Inject constructor() : IAppRepository {
         return if (app != null)
             Response.Success(app)
         else
-            Response.Error(Exception())
+            Response.Error(Exception("App not found"))
     }
 
 

@@ -19,8 +19,6 @@ import pt.brunoponte.aptoidestore.domain.useCases.GetAppUseCase
 import pt.brunoponte.aptoidestore.presentation.appDetails.AppDetailsUiModel
 import pt.brunoponte.aptoidestore.presentation.appDetails.AppDetailsViewModel
 import pt.brunoponte.aptoidestore.presentation.appDetails.AppDetailsViewState
-import pt.brunoponte.aptoidestore.presentation.frontstore.AppItemUiModel
-import pt.brunoponte.aptoidestore.presentation.frontstore.FrontstoreViewState
 import java.time.LocalDateTime
 
 @RunWith(JUnit4::class)
@@ -74,8 +72,10 @@ class AppDetailsViewModelTest {
             viewModel.getAppFromId(getAppResult.id)
 
             assertEquals(
-                AppDetailsViewState.Content(
-                    AppDetailsUiModel(
+                AppDetailsViewState(
+                    isLoading = false,
+                    message = null,
+                    app = AppDetailsUiModel(
                         getAppResult.id,
                         getAppResult.name,
                         getAppResult.size,
@@ -99,7 +99,10 @@ class AppDetailsViewModelTest {
             viewModel.getAppFromId(1)
 
             assertEquals(
-                AppDetailsViewState.Error("Some message"),
+                AppDetailsViewState(
+                    isLoading = false,
+                    message = "Some message",
+                    app = null),
                 viewModel.viewState.value
             )
         }

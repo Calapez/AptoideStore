@@ -94,9 +94,12 @@ class FrontstoreViewModelTest {
             viewModel.getApps()
 
             assertEquals(
-                FrontstoreViewState.Content(getAppsResult.map {
-                    AppItemUiModel(it.id, it.name, it.rating, it.graphicUrl, it.iconUrl)
-                }),
+                FrontstoreViewState(
+                    isLoading = false,
+                    message = null,
+                    apps = getAppsResult.map {
+                        AppItemUiModel(it.id, it.name, it.rating, it.graphicUrl, it.iconUrl)
+                    }),
                 viewModel.viewState.value
             )
         }
@@ -110,7 +113,13 @@ class FrontstoreViewModelTest {
 
             viewModel.getApps()
 
-            assertEquals(FrontstoreViewState.Content(listOf()), viewModel.viewState.value)
+            assertEquals(
+                FrontstoreViewState(
+                    isLoading = false,
+                    message = null,
+                    apps = listOf()
+                ),
+                viewModel.viewState.value)
         }
     }
 
@@ -125,7 +134,10 @@ class FrontstoreViewModelTest {
             viewModel.getApps()
 
             assertEquals(
-                FrontstoreViewState.Error(getAppsErrorException.message ?: ""),
+                FrontstoreViewState(
+                    isLoading = false,
+                    message = "Some message",
+                    apps = null),
                 viewModel.viewState.value
             )
         }

@@ -36,6 +36,6 @@ data class AppDetailsUiModel (
     }
 
     fun getDownloadsUiString() = downloads?.let {
-        NumberFormat.getIntegerInstance().format(downloads);
+        NumberFormat.getIntegerInstance().format(downloads)
     }
 }

@@ -1,7 +1,6 @@
 package pt.brunoponte.aptoidestore.data.dataSources
 
 import pt.brunoponte.aptoidestore.data.local.daos.AppDao
-import pt.brunoponte.aptoidestore.data.local.entities.AppEntityMapper
 import pt.brunoponte.aptoidestore.data.local.entities.AppEntityMapper.Companion.asDomainModel
 import pt.brunoponte.aptoidestore.data.local.entities.AppEntityMapper.Companion.asDomainModelList
 import pt.brunoponte.aptoidestore.data.local.entities.AppEntityMapper.Companion.asEntityList

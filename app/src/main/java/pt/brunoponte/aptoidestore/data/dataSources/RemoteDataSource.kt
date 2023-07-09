@@ -1,7 +1,6 @@
 package pt.brunoponte.aptoidestore.data.dataSources
 
 import pt.brunoponte.aptoidestore.data.network.IRequestService
-import pt.brunoponte.aptoidestore.data.network.dtos.NetworkAppMapper
 import pt.brunoponte.aptoidestore.data.network.dtos.NetworkAppMapper.Companion.asDomainModelList
 import pt.brunoponte.aptoidestore.domain.models.App
 import javax.inject.Inject

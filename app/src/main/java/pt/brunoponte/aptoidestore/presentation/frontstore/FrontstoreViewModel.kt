@@ -30,7 +30,9 @@ constructor(
             _viewState.update { currentViewState ->
                 currentViewState.copy(isLoading = true)
             }
+
             val response = getAppListUseCase.execute()
+
             when (response) {
                 is Response.Success -> _viewState.update { currentViewState ->
                     currentViewState.copy(

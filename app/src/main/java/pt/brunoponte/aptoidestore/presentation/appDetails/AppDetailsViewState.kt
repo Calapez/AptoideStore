@@ -1,10 +1,8 @@
 package pt.brunoponte.aptoidestore.presentation.appDetails
 
 
-sealed class AppDetailsViewState {
-
-    object Loading : AppDetailsViewState()
-    data class Error(val errorMsg: String) : AppDetailsViewState()
-    data class Content(val app: AppDetailsUiModel) : AppDetailsViewState()
-
-}
+data class AppDetailsViewState (
+    val isLoading: Boolean = false,
+    val message: String? = null,
+    val app: AppDetailsUiModel? = null,
+)

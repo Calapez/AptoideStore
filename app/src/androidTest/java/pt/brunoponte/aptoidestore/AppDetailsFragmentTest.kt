@@ -48,7 +48,7 @@ class AppDetailsFragmentTest {
         val appUiModel = (fragment.viewModel.viewState.value as AppDetailsViewState.Content).app
 
         onView(withId(R.id.errorView)).check(matches(not(isDisplayed())))
-        onView(withId(R.id.loadingProgressIndicator)).check(matches(not(isDisplayed())))
+        onView(withId(R.id.`@+id/loading_progress_bar`)).check(matches(not(isDisplayed())))
 
         onView(withId(R.id.contentView)).check(matches(isDisplayed()))
         onView(withId(R.id.appNameText)).check(matches(ViewMatchers.withText(
@@ -75,7 +75,7 @@ class AppDetailsFragmentTest {
 
         val errorMsg = (fragment.viewModel.viewState.value as AppDetailsViewState.Error).errorMsg
 
-        onView(withId(R.id.loadingProgressIndicator)).check(matches(not(isDisplayed())))
+        onView(withId(R.id.`@+id/loading_progress_bar`)).check(matches(not(isDisplayed())))
         onView(withId(R.id.contentView)).check(matches(not(isDisplayed())))
         onView(withId(R.id.errorView)).check(matches(isDisplayed()))
         onView(withId(R.id.errorText)).check(matches(ViewMatchers.withText(errorMsg)))

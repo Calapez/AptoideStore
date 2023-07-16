@@ -17,7 +17,7 @@ import pt.brunoponte.aptoidestore.domain.Response
 import pt.brunoponte.aptoidestore.domain.models.App
 import pt.brunoponte.aptoidestore.domain.useCases.GetAppListUseCase
 import pt.brunoponte.aptoidestore.presentation.frontstore.AppItemUiModel
-import pt.brunoponte.aptoidestore.presentation.frontstore.FrontstoreViewModel
+import pt.brunoponte.aptoidestore.presentation.frontstore.FrontstorePresenter
 import pt.brunoponte.aptoidestore.presentation.frontstore.FrontstoreViewState
 import java.time.LocalDateTime
 
@@ -67,7 +67,7 @@ class FrontstoreViewModelTest {
         )
     )
 
-    lateinit var viewModel: FrontstoreViewModel
+    lateinit var viewModel: FrontstorePresenter
 
     @Mock
     lateinit var getAppListUseCase: GetAppListUseCase
@@ -82,7 +82,7 @@ class FrontstoreViewModelTest {
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        viewModel = FrontstoreViewModel(getAppListUseCase, testDispatcher)
+        viewModel = FrontstorePresenter(getAppListUseCase, testDispatcher)
     }
 
     @Test

@@ -15,20 +15,20 @@ constructor(
     private val dispatcher: CoroutineDispatcher
 ) : AppDetailsContract.Presenter {
 
-    private var view: AppDetailsContract.View? = null
+    private var _view: AppDetailsContract.View? = null
 
     override fun setView(view: AppDetailsContract.View) {
-        this.view = view
+        _view = view
     }
 
     override fun setAppId(appId: Long) {
         CoroutineScope(dispatcher).launch {
-            view?.setLoading(true)
+            _view?.setLoading(true)
 
             val response = getAppUseCase.execute(appId)
 
             when (response) {
-                is Response.Success -> view?.setApp(
+                is Response.Success -> _view?.setApp(
                     AppDetailsUiModel(
                         response.data.id,
                         response.data.name,
@@ -39,10 +39,10 @@ constructor(
                         response.data.graphicUrl
                     )
                 )
-                is Response.Error -> view?.setMessage(response.exception.message ?: "")
+                is Response.Error -> _view?.setMessage(response.exception.message ?: "")
             }
 
-            view?.setLoading(false)
+            _view?.setLoading(false)
         }
     }
 
@@ -51,7 +51,7 @@ constructor(
     }
 
     override fun onDestroy() {
-        view = null
+        _view = null
     }
 
 }

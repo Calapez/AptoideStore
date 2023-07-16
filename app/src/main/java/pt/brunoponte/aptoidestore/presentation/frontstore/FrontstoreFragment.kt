@@ -17,26 +17,24 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import pt.brunoponte.aptoidestore.databinding.FragmentFrontstoreBinding
 import pt.brunoponte.aptoidestore.presentation.UIHelper
+import pt.brunoponte.aptoidestore.presentation.appDetails.AppDetailsContract
 import pt.brunoponte.aptoidestore.presentation.frontstore.editorsAppListAdapter.EditorsAppListAdapter
 import pt.brunoponte.aptoidestore.presentation.frontstore.editorsAppListAdapter.EditorsAppListInteraction
 import pt.brunoponte.aptoidestore.presentation.frontstore.topAppListAdapter.TopAppListInteraction
 import pt.brunoponte.aptoidestore.presentation.frontstore.topAppListAdapter.TopAppListAdapter
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class FrontstoreFragment : Fragment(), TopAppListInteraction, EditorsAppListInteraction {
+class FrontstoreFragment : Fragment(), FrontstoreContract.View, TopAppListInteraction, EditorsAppListInteraction {
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    val viewModel: FrontstoreViewModel by viewModels()
+    @Inject
+    lateinit var presenter: FrontstoreContract.Presenter
 
     private lateinit var binding: FragmentFrontstoreBinding
 
     private lateinit var topAppListAdapter: TopAppListAdapter
     private lateinit var editorsAppListAdapter: EditorsAppListAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.getApps()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,6 +48,8 @@ class FrontstoreFragment : Fragment(), TopAppListInteraction, EditorsAppListInte
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        presenter.setView(this)
 
         topAppListAdapter = TopAppListAdapter(this).apply {
             stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy
@@ -76,9 +76,38 @@ class FrontstoreFragment : Fragment(), TopAppListInteraction, EditorsAppListInte
 
             recyclerView.adapter = editorsAppListAdapter
         }
+    }
 
-        lifecycleScope.launchWhenResumed {
-            setupViewModelObservers()
+    override fun onDestroyView() {
+        presenter.onDestroy()
+        super.onDestroyView()
+    }
+
+    override fun setLoading(enabled: Boolean) {
+        activity?.runOnUiThread {
+            binding.loadingProgressBar.isVisible = enabled
+        }
+    }
+
+    override fun setApps(apps: List<AppItemUiModel>?) {
+        activity?.runOnUiThread {
+            if (apps == null) {
+                binding.contentView.isVisible = false
+            } else {
+                binding.contentView.isVisible = true
+                topAppListAdapter.submitList(apps)
+                editorsAppListAdapter.submitList(apps)
+            }
+        }
+    }
+
+    override fun setMessage(message: String) {
+        activity?.runOnUiThread {
+            UIHelper.showSnackbar(
+                binding.root,
+                message,
+                Snackbar.LENGTH_SHORT
+            ) { presenter.onMessageClosed() }
         }
     }
 
@@ -90,34 +119,6 @@ class FrontstoreFragment : Fragment(), TopAppListInteraction, EditorsAppListInte
     override fun onTopAppClick(appId: Long) {
         val action = FrontstoreFragmentDirections.actionFrontstoreFragmentToAppDetailsFragment(appId)
         findNavController().navigate(action)
-    }
-
-    private suspend fun setupViewModelObservers() {
-        // Parse view state to show appropriate content
-        viewModel.viewState.collect { viewState ->
-
-            // If has message to show, show Snackbar
-            viewState.message?.let { message ->
-                UIHelper.showSnackbar(
-                    binding.root,
-                    message,
-                    Snackbar.LENGTH_SHORT
-                ) { viewModel.onMessageClosed() }
-            }
-
-            // If is loading, show loading indicator
-            binding.loadingProgressBar.isVisible = viewState.isLoading
-
-
-            // If has apps, show them
-            if (viewState.apps == null) {
-                binding.contentView.isVisible = false
-            } else  {
-                binding.contentView.isVisible = true
-                topAppListAdapter.submitList(viewState.apps)
-                editorsAppListAdapter.submitList(viewState.apps)
-            }
-        }
     }
 
 }
